@@ -21,7 +21,9 @@ export const contentfulToPromotions = (entries: ContentfulPromotion[]): Promotio
   }))
 
 export const promotionToEvents = (promotions: Promotion[]): Event[] =>
-  promotions.map(({ entryTitle, startTime, endTime }) => ({
+  promotions
+    .filter(({ evergreen }) => !evergreen)
+    .map(({ entryTitle, startTime, endTime }) => ({
     title: entryTitle,
     start: startTime,
     end: endTime
