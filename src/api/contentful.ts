@@ -1,6 +1,6 @@
 import { CTFL_SPACE_ID } from '../constants'
 import { contentfulResponse } from './schema'
-import { mapPromotionEntries } from './transformer'
+import { contentfulToPromotions } from './transformer'
 
 export const requestPromotionEntries = async () => {
   const req = await fetch(`https://cdn.contentful.com/spaces/${CTFL_SPACE_ID}/environments/master/entries?content_type=promotion`, {
@@ -12,5 +12,5 @@ export const requestPromotionEntries = async () => {
   const response = contentfulResponse.safeParse(json)
   !response.success && console.error(response.error?.issues)
   const items = response.data?.items ?? []
-  return mapPromotionEntries(items)
+  return contentfulToPromotions(items)
 }

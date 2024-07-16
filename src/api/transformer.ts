@@ -1,8 +1,8 @@
-import { Promotion } from '../types'
+import { Promotion, Event } from '../types'
 import { ContentfulPromotion } from './schema'
 
-export const mapPromotionEntries = (entries: ContentfulPromotion[]): Promotion[] => 
-  entries.map(({fields}) => ({
+export const contentfulToPromotions = (entries: ContentfulPromotion[]): Promotion[] =>
+  entries.map(({ fields }) => ({
     entryTitle: fields.entryTitle,
     promoCode: fields.promoCode,
     promoCodeWithMonitoring: fields.promoCodeWithMonitoring,
@@ -18,4 +18,11 @@ export const mapPromotionEntries = (entries: ContentfulPromotion[]): Promotion[]
     promoFlagBackgroundColor: fields.promoFlagBackgroundColor,
     promoFlagTextColor: fields.promoFlagTextColor,
     isVariation: fields.isVariation
+  }))
+
+export const promotionToEvents = (promotions: Promotion[]): Event[] =>
+  promotions.map(({ entryTitle, startTime, endTime }) => ({
+    title: entryTitle,
+    start: startTime,
+    end: endTime
   }))

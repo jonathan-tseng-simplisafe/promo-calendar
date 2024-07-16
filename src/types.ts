@@ -15,3 +15,9 @@ export type Promotion = {
   promoFlagTextColor: string
   isVariation: boolean
 }
+
+export type Event = {
+  title: string
+  start: string
+  end: string
+}
